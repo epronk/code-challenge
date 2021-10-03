@@ -31,7 +31,11 @@ namespace Retail.Tests
         [TestMethod]
         public void TestParseCustomer()
         {
-            GivenParserInput(@"{ ""id"" : ""8baa6dea-cc70-4748-9b27-b174e70e4b66"" } ");
+            GivenParserInput(@"{
+  ""id"" : ""8baa6dea-cc70-4748-9b27-b174e70e4b66"",
+  ""name"": ""Lezlie Stuther"",
+  ""address"": ""19045 Lawn Court""
+}");
 
             // And
             var customer = new Retail.Customer();
@@ -39,6 +43,8 @@ namespace Retail.Tests
 
             // Then
             Assert.AreEqual("8baa6dea-cc70-4748-9b27-b174e70e4b66", customer.Id);
+            Assert.AreEqual("Lezlie Stuther", customer.Name);
+            Assert.AreEqual("19045 Lawn Court", customer.Address);
         }
 
         [TestMethod]
