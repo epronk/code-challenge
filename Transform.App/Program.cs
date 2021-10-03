@@ -1,12 +1,19 @@
-﻿using System;
+﻿using System.IO;
+using Newtonsoft.Json;
 
-namespace Transform.App
+namespace Retail
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var readerFactory = new Retail.TextReaderFactory("data.json");
+            StreamWriter file = File.CreateText("data-transformed.json");
+            var writer = new JsonTextWriter(file);
+            writer.Indentation = 4;
+            var transformer = new Retail.Transformer(readerFactory, writer);
+
+            transformer.Process();
         }
     }
 }
