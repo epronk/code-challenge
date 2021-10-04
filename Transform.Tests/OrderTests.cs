@@ -28,12 +28,12 @@ namespace Retail.Tests
                 Formatting = Formatting.Indented
             };
 
-            Assert.AreEqual(@"{
+            Assert.AreEqual(TestUtils.Normalize(@"{
   ""item"": ""hat"",
   ""quantity"": 14,
   ""price"": 8,
   ""revenue"": 112
-}", JsonConvert.SerializeObject(order, serializerSettings));
+}"), JsonConvert.SerializeObject(order, serializerSettings));
         }
     }
 }

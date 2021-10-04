@@ -18,10 +18,10 @@ namespace Retail.Tests
 
             var transformer = new Retail.Transformer(readerFactory, writer);
             transformer.Process();
-            Assert.AreEqual(@"{
+            Assert.AreEqual(TestUtils.Normalize(@"{
   ""customers"": [],
   ""orders"": []
-}", sb.ToString());
+}"), sb.ToString());
         }
     }
 }
