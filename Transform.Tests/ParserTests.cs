@@ -59,6 +59,8 @@ namespace Retail.Tests
 
             // And
             var orders = new Retail.OrderCollection();
+
+            // When
             _parser.ParseOrders(orders);
 
             // Then
