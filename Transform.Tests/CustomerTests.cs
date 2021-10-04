@@ -13,10 +13,8 @@ namespace Retail.Tests
         {
             var customer = new Retail.Customer();
             customer.Id = "8baa6dea-cc70-4748-9b27-b174e70e4b66";
-	        customer.Name = "Lezlie Stuther";
+	    customer.Name = "Lezlie Stuther";
             customer.Address = "19045 Lawn Court";
-            //Assert.AreEqual("hat", order.Item);
-            //Assert.AreEqual(112, order.Revenue);
 
             DefaultContractResolver contractResolver = new DefaultContractResolver
             {

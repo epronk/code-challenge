@@ -146,7 +146,6 @@ namespace Retail
             while (_reader.TokenType == JsonToken.PropertyName)
             {
                 var propertyName = _reader.Value.ToString().ToLower();
-                //string id;
 
                 if (propertyName.Equals("customer"))
                     ParseCustomer(customer);
