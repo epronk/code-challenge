@@ -61,6 +61,11 @@ namespace Retail
             return CreateException(this, "Unexpected end when reading JSON.");
         }
 
+        internal JsonReaderException CreateUnexpectedPropertyException(string propertyName)
+        {
+            throw CreateException(this, $"Unexpected property '{propertyName}' found.");
+        }
+
         internal void ReaderReadAndAssert()
         {
             if (!_reader.Read())
@@ -88,7 +93,7 @@ namespace Retail
                 else if (propertyName.Equals("address"))
                     customer.Address = _reader.Value.ToString();
                 else
-                    throw CreateException(this, $"Unexpected property '{propertyName}' found.");
+                    throw CreateUnexpectedPropertyException(propertyName);
                 ReaderReadAndAssert();
             }
             if (_reader.TokenType != JsonToken.EndObject)
@@ -122,7 +127,7 @@ namespace Retail
                     else if (propertyName.Equals("price"))
                         order.Price = Convert.ToInt64(_reader.Value);
                     else
-                        throw CreateException(this, "expected property");
+                        throw CreateUnexpectedPropertyException(propertyName);
                     ReaderReadAndAssert();
                 }
                 collection.orders.Add(order);
@@ -161,7 +166,7 @@ namespace Retail
                     else if (propertyName.Equals("date"))
                         collection.Date = _reader.Value.ToString();
                     else
-                        throw CreateException(this, "unexpected property ");
+                        throw CreateUnexpectedPropertyException(propertyName);
                 }
                 ReaderReadAndAssert();
             }
