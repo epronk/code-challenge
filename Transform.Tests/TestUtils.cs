@@ -10,10 +10,10 @@ namespace Retail.Tests
     {
         public static string Normalize(string s)
         {
-            if (Environment.NewLine == "\n\r")
+            if (Environment.NewLine == "\r\n")
                 return s;
             else
-                return s.Replace("\n\r", Environment.NewLine);
+                return s.Replace("\r\n", Environment.NewLine);
         }
     }
 }
