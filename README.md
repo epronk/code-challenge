@@ -43,7 +43,8 @@ Your work will be evaluated primarily on:
 
 * On the command line type `Transform.App\bin\Release\net5.0\win-x64\Transform.App.exe`
 
-(A copy of the output of my solution is in the project directory with the name `data-transformed-sample.json`.
+(A copy of the output of my solution is in the project directory with
+the name `data-transformed-sample.json` for convenience)
 
 ## Implementation notes
 
