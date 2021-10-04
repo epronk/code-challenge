@@ -33,7 +33,7 @@ namespace Retail.Tests
                 Formatting = Formatting.Indented
             };
 
-            Assert.AreEqual(@"{
+            Assert.AreEqual(TestUtils.Normalize(@"{
   ""id"": 1,
   ""vendor"": ""acme"",
   ""date"": ""03/03/2017"",
@@ -46,7 +46,7 @@ namespace Retail.Tests
       ""revenue"": 112
     }
   ]
-}", JsonConvert.SerializeObject(orders, serializerSettings));
+}"), JsonConvert.SerializeObject(orders, serializerSettings));
 
         }
     }

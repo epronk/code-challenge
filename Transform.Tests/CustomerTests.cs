@@ -27,11 +27,11 @@ namespace Retail.Tests
                 Formatting = Formatting.Indented
             };
 
-            Assert.AreEqual(@"{
+            Assert.AreEqual(TestUtils.Normalize(@"{
   ""id"": ""8baa6dea-cc70-4748-9b27-b174e70e4b66"",
   ""name"": ""Lezlie Stuther"",
   ""address"": ""19045 Lawn Court""
-}", JsonConvert.SerializeObject(customer, serializerSettings));
+}"), JsonConvert.SerializeObject(customer, serializerSettings));
         }
     }
 }
