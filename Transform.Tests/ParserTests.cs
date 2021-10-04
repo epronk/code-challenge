@@ -83,7 +83,7 @@ namespace Retail.Tests
         }
 
         [TestMethod]
-        public void TestParseCustomerAndOrderItem()
+        public void TestParseCustomerIdLinked()
         {
             GivenParserInput(@"{ ""customer"": { ""id"": ""8baa6dea-cc70-4748-9b27-b174e70e4b66"" } }");
             bool customerLoaded = false;
@@ -107,6 +107,30 @@ namespace Retail.Tests
 
             // Then
             Assert.IsTrue(customerLoaded);
+            Assert.IsTrue(collectionLoaded);
+        }
+
+        [TestMethod]
+        public void TestOrderCollectionProperties()
+        {
+            GivenParserInput(@" {
+  ""id"": 1,
+  ""vendor"": ""acme"",
+  ""date"": ""03/03/2017""}");
+
+            bool collectionLoaded = false;
+            _parser.OrderCollectionLoaded += (sender, collection) =>
+            {
+                Assert.AreEqual(1, collection.Id);
+                Assert.AreEqual("acme", collection.Vendor);
+                Assert.AreEqual("03/03/2017", collection.Date);
+                collectionLoaded = true;
+            };
+
+            // When
+            _parser.ParseItem();
+
+            // Then
             Assert.IsTrue(collectionLoaded);
         }
     }
