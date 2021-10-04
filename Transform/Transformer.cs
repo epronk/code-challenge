@@ -29,7 +29,7 @@ namespace Retail
                 Formatting = Formatting.Indented,
                 ContractResolver = contractResolver
             };
-             
+
             return serializer;
         }
 
@@ -41,7 +41,7 @@ namespace Retail
             _writer.WriteStartObject();
             _writer.WritePropertyName("customers");
             _writer.WriteStartArray();
-            
+
             WriteCustomers();
 
             // ], "orders": [
@@ -56,6 +56,7 @@ namespace Retail
             _writer.WriteEndObject();
             _writer.Flush();
         }
+
         public void WriteCustomers()
         {
             TextReader sr = _readerFactory.Create();
@@ -64,6 +65,7 @@ namespace Retail
             parser.CustomerLoaded += this.OnCustomer;
             parser.ParseDoc();
         }
+
         public void WriteOrderCollection()
         {
             TextReader sr = _readerFactory.Create();
@@ -72,16 +74,12 @@ namespace Retail
             parser.OrderCollectionLoaded += this.OnOrderCollection;
             parser.ParseDoc();
         }
-        public void EndDocument()
-        {
-            _writer.WriteEndArray();
-            _writer.WriteEndObject();
-            _writer.Flush();
-        }
+
         public void OnCustomer(object sender, Retail.Customer customer)
         {
             serializer.Serialize(_writer, customer);
         }
+
         public void OnOrderCollection(object sender, Retail.OrderCollection orderCollection)
         {
             serializer.Serialize(_writer, orderCollection);
