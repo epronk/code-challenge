@@ -48,6 +48,26 @@ namespace Retail.Tests
         }
 
         [TestMethod]
+        public void TestParseOrders()
+        {
+            GivenParserInput(@"{
+   ""hat"": {
+    ""quantity"": 14,
+    ""price"": 8
+   }
+}");
+
+            // And
+            var orders = new Retail.OrderCollection();
+            _parser.ParseOrders(orders);
+
+            // Then
+            Assert.AreEqual("hat", orders.orders[0].Item);
+            Assert.AreEqual(14, orders.orders[0].Quantity);
+            Assert.AreEqual(8, orders.orders[0].Price);
+        }
+
+        [TestMethod]
         public void TestUnexpectedAttribute()
         {
             GivenParserInput(@"{ ""phone"" : ""1234567890"" } ");
