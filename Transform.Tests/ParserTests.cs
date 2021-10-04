@@ -81,5 +81,33 @@ namespace Retail.Tests
             var ex = Assert.ThrowsException<JsonReaderException>(() => _parser.ParseCustomer(customer), "");
             Assert.AreEqual("Unexpected property 'phone' found.", ex.Message);
         }
+
+        [TestMethod]
+        public void TestParseCustomerAndOrderItem()
+        {
+            GivenParserInput(@"{ ""customer"": { ""id"": ""8baa6dea-cc70-4748-9b27-b174e70e4b66"" } }");
+            bool customerLoaded = false;
+            _parser.CustomerLoaded += (sender, customer) =>
+            {
+                // Then (there is some friction here. fixme: capture the object and assert this as part of the 'Then' clause
+                Assert.AreEqual("8baa6dea-cc70-4748-9b27-b174e70e4b66", customer.Id);
+                customerLoaded = true;
+            };
+
+            bool collectionLoaded = false;
+            _parser.OrderCollectionLoaded += (sender, collection) =>
+            {
+                // Then (fixme: same as above)
+                Assert.AreEqual("8baa6dea-cc70-4748-9b27-b174e70e4b66", collection.Customer);
+                collectionLoaded = true;
+            };
+
+            // When 
+            _parser.ParseItem();
+
+            // Then
+            Assert.IsTrue(customerLoaded);
+            Assert.IsTrue(collectionLoaded);
+        }
     }
 }
