@@ -26,7 +26,7 @@ jobs:
     - name: Publish
       run: dotnet publish -c Release -r win-x64
     - name: Generate coverage report
-      run:  dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura
+      run:  dotnet test --output build --collect:"XPlat Code Coverage"
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v2
       with:
